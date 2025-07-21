@@ -91,12 +91,12 @@ In this repo, we release:
 * Seven class-conditional generation models ranging from 100M to 3B parameters.
 
 ### VQ-VAE models
-In this repo, we release two image tokenizers: Hita-V(vanilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction, which exhibits better image reconstruction and generation quality.
+In this repo, we release two image tokenizers: Hita-V(anilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction, which exhibits better image reconstruction and generation quality.
 
 Method | tokens | rFID (256x256) | rIS (256x256)    | weight
 ---    | :---:  |:---:|:---:   | :---: 
 Hita-V |  569   | 1.03  | 198.5   | [hita-vanilla.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/tokenizer/hita-tok.pt)
-Hita-U |  569   | 0.57  | 221.8   | [hita-ultra.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/tokenizer/hita-ultra.pt)
+Hita-U |  569   | **0.57**  | **221.8**   | [hita-ultra.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/tokenizer/hita-ultra.pt)
 
 ### AR generation models with Hita-V
 Method   | params | epochs | FID  |  IS   | weight 
@@ -115,11 +115,11 @@ Method  | params | epochs  | FID |  IS | weight
 HitaU-B  | 111M | 50  | 4.21 | 229.0 | [HitaU-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-50e.pt)
 HitaU-B  | 111M | 250 | 3.49 | 237.5 | [HitaU-B-250e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-250e.pt)
 HitaU-L  | 343M | 50  | 2.97 | 273.3 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-50e.pt)
-HitaU-L  | 343M | 250 | 2.44 | 274.6 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-250e.pt)
+HitaU-L  | 343M | 250 | 2.44 | 274.6 | [HitaU-L-250e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-250e.pt)
 HitaU-XL | 775M | 50  | 2.40 | 276.3 | [HitaU-XL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-50e.pt)
 HitaU-XL | 775M | 100 | 2.16 | 275.3 | [HitaU-XL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-100e.pt)
 HitaU-XXL| 1.4B | 50  | 2.07 | 273.8 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-50e.pt)
-HitaU-XXL| 1.4B | 100 | 2.01 | 276.4 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
+HitaU-XXL| 1.4B | 100 | 2.01 | 276.4 | [HitaU-XXL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
 HitaU-2B | 2.0B | 50  | 1.93 | 286.0 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
 HitaU-2B | 2.0B | 50  | 1.82 | 282.9 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
@@ -132,11 +132,11 @@ Method  | params | epochs  | FID |  IS| weight
 HitaU-B  | 111M | 50  | 8.32 | 108.5 | [HitaU-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-50e.pt)
 HitaU-B  | 111M | 250 | 5.19 | 138.9 | [HitaU-B-250e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-250e.pt)
 HitaU-L  | 343M | 50  | 3.96 | 151.8 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-50e.pt)
-HitaU-L  | 343M | 250 | 2.46 | 188.9 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-250e.pt)
+HitaU-L  | 343M | 250 | 2.46 | 188.9 | [HitaU-L-250e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-250e.pt)
 HitaU-XL | 775M | 50  | 2.66 | 178.9 | [HitaU-XL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-50e.pt)
 HitaU-XL | 775M | 100 | 2.21 | 195.8 | [HitaU-XL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-100e.pt)
 HitaU-XXL| 1.4B | 50  | 2.21 | 196.0 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-50e.pt)
-HitaU-XXL| 1.4B | 100 | 1.84 | 217.2 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
+HitaU-XXL| 1.4B | 100 | 1.84 | 217.2 | [HitaU-XXL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
 HitaU-2B | 2.0B | 50  | 1.97 | 208.6 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
 HitaU-2B | 2.0B | 50  | 1.69 | 233.0 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
