@@ -1,8 +1,5 @@
-# Holistic Tokenizer for Autoregressive Image Generation
+# [Holistic Tokenizer for Autoregressive Image Generation](https://arxiv.org/pdf/2507.02358v4)
 
-<!-- [[Model Zoo](https://huggingface.co/yexiguafu/hita-gen/tree/main)] -->
-
-[**Holistic Tokenizer for Autoregressive Image Generation**](https://arxiv.org/pdf/2507.02358v4) by
 [Anlin Zheng](https://yexiguafuqihao.github.io/), 
 [Haochen Wang](https://haochen-wang409.github.io), 
 [Yucheng Zhao](https://scholar.google.com/citations?user=QWemjjQAAAAJ&hl=en),
@@ -11,21 +8,16 @@
 [Xiangyu Zhang](https://scholar.google.com/citations?user=yuB-cfoAAAAJ&hl=en), and
 [Xiaojuan Qi](https://xjqi.github.io/).
 
+<div align="justify">
 **TL; DR**: We introduce a holistic-to-local tokenization scheme, dubbed as Hita, which uses learnable holistic tokens and local patch tokens to incoporate global information for AR (autoregressive) image generation. Beyond image tokenization, Hita emerges with new features such as zero-shot style transfer and zeros-shot image in-painting. Besides, It also exhibits the capability of accelerating convergence speed during training and significantly improves the synthesis quality.
+</div>
 
-> **Abstract.** Vanilla autoregressive image generation models generate visual tokens step-by-step, limiting their ability 
-> to capture holistic relationships among token sequences. Moreover, because most visual tokenizers map local image patches 
-> into latent tokens, global information is limited. To address this, we introduce Hita, a novel image tokenizer for 
-> autoregressive (AR) image generation. It introduces a holistic-to-local tokenization scheme with learnable holistic queries 
-> and local patch tokens. Hita incorporates two key strategies to better align with the AR generation process: 1) arranging a 
-> sequential structure with holistic tokens at the beginning, followed by patch-level tokens, and using causal attention to  
-> maintain awareness of previous tokens; and 2) adopting a lightweight fusion module before feeding the de-quantized tokens 
-> into the decoder to control information flow and prioritize holistic tokens. Extensive experiments show that Hita accelerates 
-> the training speed of AR generators and outperforms those trained with vanilla tokenizers, achieving 2.59 FID and 281.9 IS on 
-> the ImageNet benchmark. Detailed analysis of the holistic representation highlights its ability to capture global image properties, 
-> such as textures, materials, and shapes. Additionally, Hita also demonstrates effectiveness in zero-shot style transfer and image in-painting. 
+<div align="justify">
+   <!-- 这是需要两端对齐的文本内容。  它会根据容器的宽度自动调整文字之间的间距，
+   以使文字的两端都与容器的边界对齐。 -->
+**Abstract.** Vanilla autoregressive image generation models generate visual tokens step-by-step, limiting their ability to capture holistic relationships among token sequences. Moreover, because most visual tokenizers map local image patches into latent tokens, global information is limited. To address this, we introduce Hita, a novel image tokenizer for autoregressive (AR) image generation. It introduces a holistic-to-local tokenization scheme with learnable holistic queries and local patch tokens. Hita incorporates two key strategies to better align with the AR generation process: 1) arranging a sequential structure with holistic tokens at the beginning, followed by patch-level tokens, and using causal attention to maintain awareness of previous tokens; and 2) adopting a lightweight fusion module before feeding the de-quantized tokens into the decoder to control information flow and prioritize holistic tokens. Extensive experiments show that Hita accelerates the training speed of AR generators and outperforms those trained with vanilla tokenizers, achieving 2.59 FID and 281.9 IS on the ImageNet benchmark. Detailed analysis of the holistic representation highlights its ability to capture global image properties, such as textures, materials, and shapes. Additionally, Hita also demonstrates effectiveness in zero-shot style transfer and image in-painting. 
+</div>
 
-<!-- ![](./assets/method.png) -->
 <p align="center">
 <img src="assets/application.png" width=95%>
 <p>
@@ -53,7 +45,7 @@
 
 If you are not using Linux, do *NOT* proceed.
 
-1. Clone this repository and navigate to LLaVA folder
+1. Clone this repository and navigate to Hita folder
 ```bash
 git clone https://github.com/CVMI-Lab/Hita.git
 cd Hita
