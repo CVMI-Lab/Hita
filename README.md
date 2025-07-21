@@ -1,6 +1,6 @@
 # Holistic Tokenizer for Autoregressive Image Generation
 
-[[Model Zoo](https://huggingface.co/yexiguafu/hita-gen/tree/main)]
+<!-- [[Model Zoo](https://huggingface.co/yexiguafu/hita-gen/tree/main)] -->
 
 [**Holistic Tokenizer for Autoregressive Image Generation**](https://arxiv.org/pdf/2507.02358v4) by
 [Anlin Zheng](https://yexiguafuqihao.github.io/), 
@@ -25,7 +25,11 @@
 > the ImageNet benchmark. Detailed analysis of the holistic representation highlights its ability to capture global image properties, 
 > such as textures, materials, and shapes. Additionally, Hita also demonstrates effectiveness in zero-shot style transfer and image in-painting. 
 
-![](./assets/method.png)
+<!-- ![](./assets/method.png) -->
+<p align="center">
+<img src="assets/application.jpg" width=95%>
+<p>
+
 
 ## Release
 - [2025/07/21] 🔥 [Image tokenizers](https://huggingface.co/yexiguafu/hita-gen/tree/main) and [AR models](https://huggingface.co/yexiguafu/hita-gen/tree/main) for class-conditional image generation are released. 🔥
@@ -99,14 +103,10 @@ Method  | params | training | tokenizer | tokens | epochs  | FID (256x256) |  IS
 ---     | :---:|:---:|:---:   |:---:|:---:| :---:|:---:  |:---:|
 HitaV-B  | 111M | DDP | Hita-V | 569 | 50  | 5.85 | 212.3 | [HitaV-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-B/GPT-B-50e.pt)
 HitaV-B  | 111M | DDP | Hita-V | 569 | 300 | 4.33 | 238.9 | [HitaV-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-B/GPT-B-300e.pt)
->
 HitaV-L  | 343M | DDP | Hita-V | 569 | 50  | 3.75 | 262.1 | [HitaV-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-L/GPT-L-50e.pt)
 HitaV-L  | 343M | DDP | Hita-V | 569 | 300 | 2.86 | 267.3 | [HitaV-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-L/GPT-L-300e.pt)
->
 HitaV-XL | 775M | DDP | Hita-V | 569 | 50  | 2.98 | 253.4 | [HitaV-XL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-XL/GPT-XL-50e.pt)
->
 HitaV-XXL| 1.4B | DDP | Hita-V | 569 | 50  | 2.70 | 274.8 | [HitaV-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-XXL/GPT-XXL-50e.pt)
->
 HitaV-2B | 2.0B | DDP | Hita-V | 569 | 50  | 2.59 | 281.9 | [HitaV-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-2B/GPT-2B-50e.pt)
 
 ### AR generation with Hita-U
@@ -114,38 +114,29 @@ Method  | params | training | tokenizer | tokens | epochs  | FID (256x256) |  IS
 ---     | :---:|:---:|:---:   |:---:|:---:| :---:|:---:  |:---:|
 HitaU-B  | 111M | DDP | Hita-U | 569 | 50  | 4.21 | 229.0 | [HitaU-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-50e.pt)
 HitaU-B  | 111M | DDP | Hita-U | 569 | 250 | 3.49 | 237.5 | [HitaU-B-250e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-250e.pt)
->
 HitaU-L  | 343M | DDP | Hita-U | 569 | 50  | 2.97 | 273.3 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-50e.pt)
 HitaU-L  | 343M | DDP | Hita-U | 569 | 250 | 2.44 | 274.6 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-250e.pt)
->
 HitaU-XL | 775M | DDP | Hita-U | 569 | 50  | 2.40 | 276.3 | [HitaU-XL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-50e.pt)
 HitaU-XL | 775M | DDP | Hita-U | 569 | 100 | 2.16 | 275.3 | [HitaU-XL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-100e.pt)
->
 HitaU-XXL| 1.4B | DDP | Hita-U | 569 | 50  | 2.07 | 273.8 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-50e.pt)
 HitaU-XXL| 1.4B | DDP | Hita-U | 569 | 100 | 2.01 | 276.4 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
->
 HitaU-2B | 2.0B | DDP | Hita-U | 569 | 50  | 1.93 | 286.0 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
 HitaU-2B | 2.0B | DDP | Hita-U | 569 | 50  | 1.82 | 282.9 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
 ### AR generation with CFG-free guidance
-Once the pre-trained VFM features and the original image reconstruction are simultaneously conducted, we found that the trained Hita-U(ltra), when integrated 
->into the AR generation models, can achieve image generation without CFG-guidance.
+Once the pre-trained VFM features and the original image reconstruction are simultaneously conducted, we found that the trained Hita-U(ltra), when integrated into the AR generation models, can achieve image generation without CFG-guidance.
 
 
 Method  | params | training | tokenizer | tokens | epochs  | FID (256x256) |  IS (256x256) | weight 
 ---     | :---:|:---:|:---:   |:---:|:---:| :---:|:---:  |:---:|
 HitaU-B  | 111M | DDP | Hita-U | 569 | 50  | 8.32 | 108.5 | [HitaU-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-50e.pt)
 HitaU-B  | 111M | DDP | Hita-U | 569 | 250 | 5.19 | 138.9 | [HitaU-B-250e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-250e.pt)
->
 HitaU-L  | 343M | DDP | Hita-U | 569 | 50  | 3.96 | 151.8 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-50e.pt)
 HitaU-L  | 343M | DDP | Hita-U | 569 | 250 | 2.46 | 188.9 | [HitaU-L-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-L/GPT-L-250e.pt)
->
 HitaU-XL | 775M | DDP | Hita-U | 569 | 50  | 2.66 | 178.9 | [HitaU-XL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-50e.pt)
 HitaU-XL | 775M | DDP | Hita-U | 569 | 100 | 2.21 | 195.8 | [HitaU-XL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XL/GPT-XL-100e.pt)
->
 HitaU-XXL| 1.4B | DDP | Hita-U | 569 | 50  | 2.21 | 196.0 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-50e.pt)
 HitaU-XXL| 1.4B | DDP | Hita-U | 569 | 100 | 1.84 | 217.2 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
->
 HitaU-2B | 2.0B | DDP | Hita-U | 569 | 50  | 1.97 | 208.6 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
 HitaU-2B | 2.0B | DDP | Hita-U | 569 | 50  | 1.69 | 233.0 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
