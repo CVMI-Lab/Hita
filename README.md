@@ -27,10 +27,6 @@ This repo contains:
 - [2025/06/26] 🔥 **Hita has been accepted by ICCV 2025!** 🔥
 
 
-[![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](https://github.com/tatsu-lab/stanford_alpaca/blob/main/LICENSE)
-**Usage and License Notices**: This project utilizes certain datasets and checkpoints that are subject to their respective original licenses. Users must comply with all terms and conditions of these original licenses, including but not limited to the [OpenAI Terms of Use](https://openai.com/policies/terms-of-use) for the dataset and the specific licenses for base language models for checkpoints trained using the dataset (e.g. [Llama community license](https://ai.meta.com/llama/license/) for LLaMA-2 and Vicuna-v1.5). This project does not impose any additional constraints beyond those stipulated in the original licenses. Furthermore, users are reminded to ensure that their use of the dataset and checkpoints is in compliance with all applicable laws and regulations.
-
-
 ## Contents
 - [Install](#install)
 - [Model Zoo](#model-zoo)
@@ -222,6 +218,10 @@ If you find Hita useful for your research and applications, please kindly cite u
   year={2025}
 }
 ```
+
+## License
+The majority of this project is licensed under MIT License. Portions of the project are available under separate license of referred projects, detailed in corresponding files.
+
 
 ## Acknowledgement
 
