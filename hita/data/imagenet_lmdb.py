@@ -19,7 +19,10 @@ class LMDBImageNet(Dataset):
         with self.env.begin() as txn:
             self.length = int(txn.get('num_samples'.encode()).decode())
         self.samples = np.arange(self.length)
+        
+        np.random.seed(42)
         np.random.shuffle(self.samples)
+
         self.transform = transform
     
     def __len__(self):

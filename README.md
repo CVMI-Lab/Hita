@@ -1,29 +1,25 @@
-# [Holistic Tokenizer for Autoregressive Image Generation](https://arxiv.org/pdf/2507.02358v4)
 
-[Anlin Zheng](https://yexiguafuqihao.github.io/), 
-[Haochen Wang](https://haochen-wang409.github.io), 
-[Yucheng Zhao](https://scholar.google.com/citations?user=QWemjjQAAAAJ&hl=en),
-[Weipeng Deng](https://scholar.google.com/citations?user=JBMI5yQAAAAJ&hl=en),
-[Tiancai Wang](https://scholar.google.com/citations?user=YI0sRroAAAAJ&hl=en),
-[Xiangyu Zhang](https://scholar.google.com/citations?user=yuB-cfoAAAAJ&hl=en), and
-[Xiaojuan Qi](https://xjqi.github.io/).
+# Holistic Tokenizer for Autoregressive Image Generation <br><sub>Official PyTorch Implementation</sub>
 
-<div align="justify">
-**TL; DR**: We introduce a holistic-to-local tokenization scheme, dubbed as Hita, which uses learnable holistic tokens and local patch tokens to incoporate global information for AR (autoregressive) image generation. Beyond image tokenization, Hita emerges with new features such as zero-shot style transfer and zeros-shot image in-painting. Besides, It also exhibits the capability of accelerating convergence speed during training and significantly improves the synthesis quality.
-</div>
+[![arXiv](https://img.shields.io/badge/arXiv-2507.02358-b31b1b.svg)](https://arxiv.org/abs/2507.02358)&nbsp;
 
-<div align="justify">
-   <!-- 这是需要两端对齐的文本内容。  它会根据容器的宽度自动调整文字之间的间距，
-   以使文字的两端都与容器的边界对齐。 -->
-**Abstract.** Vanilla autoregressive image generation models generate visual tokens step-by-step, limiting their ability to capture holistic relationships among token sequences. Moreover, because most visual tokenizers map local image patches into latent tokens, global information is limited. To address this, we introduce Hita, a novel image tokenizer for autoregressive (AR) image generation. It introduces a holistic-to-local tokenization scheme with learnable holistic queries and local patch tokens. Hita incorporates two key strategies to better align with the AR generation process: 1) arranging a sequential structure with holistic tokens at the beginning, followed by patch-level tokens, and using causal attention to maintain awareness of previous tokens; and 2) adopting a lightweight fusion module before feeding the de-quantized tokens into the decoder to control information flow and prioritize holistic tokens. Extensive experiments show that Hita accelerates the training speed of AR generators and outperforms those trained with vanilla tokenizers, achieving 2.59 FID and 281.9 IS on the ImageNet benchmark. Detailed analysis of the holistic representation highlights its ability to capture global image properties, such as textures, materials, and shapes. Additionally, Hita also demonstrates effectiveness in zero-shot style transfer and image in-painting. 
-</div>
 
 <p align="center">
 <img src="assets/application.png" width=95%>
 <p>
 
+This is a PyTorch/GPU implementation of the paper **Holistic Tokenizer for Autoregressive Image Generation**:
+
+This repo contains:
+
+* 🪐 A simple PyTorch implementation of Hita tokenizer and various AR generative models.
+* ⚡️ Pre-trained Hita tokenizers and AR generative models trained on ImageNet.
+* 🛸 Training and evaluation scripts for tokenizer and generative models, which were also provided in [here](./scripts).
+* 🎉 Hugging Face for easy access to pre-trained models.
+
 
 ## Release
+
 - [2025/07/21] 🔥 [Image tokenizers](https://huggingface.co/yexiguafu/hita-gen/tree/main) and [AR models](https://huggingface.co/yexiguafu/hita-gen/tree/main) for class-conditional image generation are released. 🔥
 - [2025/07/21] 🔥 All codes of Hita have been released. 🔥
 - [2024/07/03] 🔥 **Hita** has been released. Checkout the [paper](https://arxiv.org/pdf/2410.09575) for details.🔥
@@ -59,7 +55,7 @@ pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
 ```
 
-3. Install additional packages for training cases
+3. Install additional packages for training cases as required.
 ```
 pip install -e ".[train]"
 pip install flash-attn --no-build-isolation
@@ -82,15 +78,15 @@ In this repo, we release:
 * Two image tokenizers: Hita-V(anilla) and Hita-U(ltra).
 * Seven class-conditional generation models ranging from 100M to 3B parameters.
 
-### VQ-VAE models
-In this repo, we release two image tokenizers: Hita-V(anilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction, which exhibits better image reconstruction and generation quality.
+### 1. VQ-VAE models
+In this repo, we release two image tokenizers: Hita-V(anilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction proposed in [VFMTok](https://arxiv.org/pdf/2507.08441), which exhibits better image reconstruction and generation quality.
 
 Method | tokens | rFID (256x256) | rIS (256x256)    | weight
 ---    | :---:  |:---:|:---:   | :---: 
 Hita-V |  569   | 1.03  | 198.5   | [hita-vanilla.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/tokenizer/hita-tok.pt)
 Hita-U |  569   | **0.57**  | **221.8**   | [hita-ultra.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/tokenizer/hita-ultra.pt)
 
-### AR generation models with Hita-V
+### 2. AR generation models with Hita-V
 Method   | params | epochs | FID  |  IS   | weight 
 ---      | :---:  | :---:  | :---:|:---:  |:---:|
 HitaV-B  | 111M   |   50   | 5.85 | 212.3 | [HitaV-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-B/GPT-B-50e.pt)
@@ -101,7 +97,7 @@ HitaV-XL | 775M   |   50   | 2.98 | 253.4 | [HitaV-XL-50e.pt](https://huggingfac
 HitaV-XXL| 1.4B   |   50   | 2.70 | 274.8 | [HitaV-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-XXL/GPT-XXL-50e.pt)
 HitaV-2B | 2.0B   |   50   | 2.59 | 281.9 | [HitaV-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/vanilla/GPT-2B/GPT-2B-50e.pt)
 
-### AR generation with Hita-U
+### 3. AR generation with Hita-U
 Method  | params | epochs  | FID |  IS | weight 
 ---     |:---:|:---:| :---: | :---: |:---:|
 HitaU-B  | 111M | 50  | 4.21 | 229.0 | [HitaU-B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-B/GPT-B-50e.pt)
@@ -115,9 +111,8 @@ HitaU-XXL| 1.4B | 100 | 2.01 | 276.4 | [HitaU-XXL-100e.pt](https://huggingface.c
 HitaU-2B | 2.0B | 50  | 1.93 | 286.0 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
 HitaU-2B | 2.0B | 50  | 1.82 | 282.9 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
-### AR generation with CFG-free guidance
+### 4. AR generation with CFG-free guidance
 Once the pre-trained VFM features and the original image reconstruction are simultaneously conducted, we found that the trained Hita-U(ltra), when integrated into the AR generation models, can achieve image generation without CFG-guidance.
-
 
 Method  | params | epochs  | FID |  IS| weight 
 ---     | :---: |:---:| :---:|:---:  |:---:|
@@ -132,42 +127,96 @@ HitaU-XXL| 1.4B | 100 | 1.84 | 217.2 | [HitaU-XXL-100e.pt](https://huggingface.c
 HitaU-2B | 2.0B | 50  | 1.97 | 208.6 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
 HitaU-2B | 2.0B | 50  | 1.69 | 233.0 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
-## Train
+## Training
 
-In Hita, xxxx
-<!-- 
-Ross training consists of two stages: 
-(1) feature alignment stage to connect a *frozen vision encoder* to a *frozen LLM*;
-(2) instruction tuning stage to teach the model to follow multimodal instructions.
+### 1. Preparation
 
-Ross is trained on 8 A100 GPUs with 80GB memory. 
-To train on fewer GPUs, you can reduce the `per_device_train_batch_size` and increase the `gradient_accumulation_steps` accordingly. 
-Always keep the global batch size the same: `per_device_train_batch_size` x `gradient_accumulation_steps` x `num_gpus`. -->
+1. Download the [DINOv2-L](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_reg4_pretrain.pth) pre-trained foundation model from the official [model card](https://github.com/facebookresearch/dinov2).
+2. Create symbolic links that point from the locations of the pretrained DINOv2-L model and the ImageNet training dataset folders to this directory.
+3. Create dataset script for your own dataset. Here, we provide a template for training tokenizers and AR generative models using the ImageNet dataset in [LMDB](https://www.symas.com/mdb) format.
 
-<!-- ### Download VAE checkpoints
+```bash
+ln -s DINOv2-L_folder init_models
+ln -s ImageNetFolder imagenet
+```
 
-Our base model takes the VAE from [FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) as the fine-grained tokenizer.
-Downloading the checkpoint from [this URL](https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/vae/) and put them into ```./pretrained_vae```. -->
+### 1.Hita Tokenizer Training
 
-### Pretrain
+1. Training Hita-V tokenizer:
 
-Training script with DeepSpeed ZeRO-2 can be found in ```scripts/train_ross/pretrain_*.sh```.
+```bash
+export NODE_COUNT=1
+export NODE_RANK=0
+export PROC_PER_NODE=8
+scripts/torchrun.sh vq_train.py --image-size 336 --results-dir output --mixed-precision bf16 --codebook-embed-dim 8 --disc-type patchgan  \
+    --data-path imagenet/lmdb/train_lmdb --global-batch-size 256 --num-workers 4 --ckpt-every 5000 --epochs 50 --log-every 1 --lr 1e-4    \
+    --transformer-config configs/hita_vqgan.yaml --ema --z-channels 512
+```
 
-- ```--mm_inv_projector_type denoiser_vit3x```: the architecture of the denoiser, containing 3 transformer blocks by default.
-- ```--mm_pixel_decoder ./pretrained_vae```: the visual tokenizer.
+2. Training Hita-V tokenizer:
 
-### Instruction Tuning
+```bash
+scripts/torchrun.sh vq_train.py --image-size 336 --results-dir output --mixed-precision bf16 --codebook-embed-dim 8 --disc-type dinogan  \
+    --data-path imagenet/lmdb/train_lmdb --global-batch-size 256 --num-workers 4 --ckpt-every 5000 --epochs 50 --log-every 1 --lr 1e-4   \
+    --transformer-config configs/hita_vqgan_ultra.yaml --ema --z-channels 512 --enable-vfm-recon
+```
 
-Training script with DeepSpeed ZeRO-3 can be found in ```scripts/train_ross/funetune_*.sh```.
+### 2. AR generative model training
 
+1. Training AR generative models
 
-## Evaluation
+```bash
+model_type='GPT-L' # 'GPT-B' 'GPT-XL' 'GPT-XXL' 'GPT-2B'
+scripts/torchrun.sh  \
+    train_c2i.py --gpt-type c2i --image-size 336 --gpt-model ${model_type} --downsample-size 16 --num-workers 4     \
+    --anno-file imagenet/lmdb/train_lmdb --global-batch-size 256 --ckpt-every 10000 --ema --log-every 1             \
+    --results-dir output/vanilla --vq-ckpt pretrained_models/hita-tok.pt --epochs 300 --codebook-embed-dim 8        \
+    --codebook-slots-embed-dim 12 --transformer-config-file configs/hita_vqgan.yaml --mixed-precision bf16 --lr 1e-4
+```
 
-In Hita,
+2. Resume from an AR generative checkpoint
+```bash
+model_type='GPT-L'
+scripts/torchrun.sh  \
+    train_c2i.py --gpt-type c2i --image-size 336 --gpt-model ${model_type} --downsample-size 16 --num-workers 4     \
+    --anno-file imagenet/lmdb/train_lmdb --global-batch-size 270 --ckpt-every 10000 --ema --log-every 1             \
+    --results-dir output/vanilla --vq-ckpt pretrained_models/hita-tok.pt --epochs 300 --codebook-embed-dim 8        \
+    --codebook-slots-embed-dim 12 --transformer-config-file configs/hita_vqgan.yaml --mixed-precision bf16          \
+    --lr 1e-4 --gpt-ckpt output/vanilla/${model_type}/${model_type}-{ckpt_name}.pt
+```
 
+### 3. Evaluation (ImageNet 256x256)
+
+1. Evaluated a pretrained Hita-V tokenizer
+
+```bash
+scripts/torchrun.sh  \
+        vqgan_test.py --vq-model VQ-16 --image-size 336 --output_dir recons --batch-size 50   \
+        --transformer-config-file configs/hita_vqgan.yaml --z-channels 512                    \
+        --vq-ckpt pretrained_models/hita-tok.pt
+```
+
+2. Evaluate a pretrained Hita-U tokenizer:
+
+```bash
+scripts/torchrun.sh  \
+        vqgan_test.py --vq-model VQ-16 --image-size 336 --output_dir recons --batch-size 50   \
+        --transformer-config-file configs/hita_vqgan_ultra.yaml --z-channels 512              \
+        --vq-ckpt pretrained_models/hita-ultra.pt
+```
+3. Evaluate a pretrained AR generative model
+
+```bash
+model_type='GPT-L' # 'GPT-B' 'GPT-XL' 'GPT-XXL' 'GPT-2B'
+scripts/torchrun.sh  \
+         test_net.py --vq-ckpt pretrained_models/hita-ultra.pt --gpt-ckpt output/ultra/${model_type}/${model_type}-$1.pt      \
+         --num-slots 128 --gpt-model ${model_type} --image-size 336 --compile --sample-dir samples --cfg-scale $2             \
+         --image-size-eval 256 --precision bf16 --per-proc-batch-size $3 --codebook-embed-dim 8 --codebook-slots-embed-dim 12 \
+         --transformer-config-file configs/hita_vqgan_ultra.yaml
+```
 ## Citation
 
-If you find Hita useful for your research and applications, please cite using this BibTeX:
+If you find Hita useful for your research and applications, please kindly cite using this BibTeX:
 ```
 @article{zheng2025holistic,
   title={Holistic Tokenizer for Autoregressive Image Generation},
@@ -186,6 +235,3 @@ If you find Hita useful for your research and applications, please cite using th
 ## Acknowledgement
 
 - [LlamaGen](https://github.com/FoundationVision/LlamaGen/tree/main): the codebase we built upon.
-<!-- - [Cambrian-1](https://github.com/cambrian-mllm/cambrian): the dataset we utilized.
-- [VLMEvalKit](https://github.com/open-compass/VLMEvalKit) and [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval): the evaluation codebases we built upon.
-- [Qwen](https://huggingface.co/Qwen) and [Vicuna](https://github.com/lm-sys/FastChat): the base LLMs we utilized. -->

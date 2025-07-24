@@ -1,8 +1,6 @@
 import json, time
 import torch, timm
 import numpy as np
-import pandas as pd
-import torch_fidelity
 import os.path as osp
 from glob import glob
 from PIL import Image
@@ -18,12 +16,14 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from hita.evaluations.evaluator import Evaluator
 from hita.data.augmentation import center_crop_arr
-from hita.data.imagenet_nori import ImageNetNori as ImageNet
+
 from hita.tokenizer.tokenizer_image.vq_model import VQ_models
 from skimage.metrics import structural_similarity as ssim_loss
 from skimage.metrics import peak_signal_noise_ratio as psnr_loss
 
 from hita.engine.distributed import init_distributed_mode
+from torch.utils.data.distributed import DistributedSampler
+from hita.data.imagenet_lmdb import LMDBImageNet as ImageNet
 from hita.engine.misc import (is_main_process, get_rank, get_world_size, concat_all_gather)
 
 def get_args_parser():
@@ -58,60 +58,9 @@ def get_args_parser():
     parser.add_argument("--image-size", type=int, choices=[256, 336, 384, 448, 512, 1024], default=512)
     parser.add_argument("--transformer-config-file", type=str, default='configs/vit_transformer.yaml',)
     parser.add_argument("--z-channels", type=int, default=512,)
-    parser.add_argument("--anno-file", type=str, default='imagenet/imagenet.val.oss.list')
+    parser.add_argument("--anno-file", type=str, default='imagenet/lmdb/val_lmdb')
     
     return parser
-
-def build_imagenet_dataloader(anno_file, num_tasks, local_rank, args):
-
-    assert osp.exists(anno_file)
-    transform = transforms.Compose([
-                transforms.Lambda(lambda pil_image: center_crop_arr(pil_image, args.image_size)),
-                transforms.ToTensor(),
-                transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5], inplace=True)
-            ])
-
-    samples = []
-    with open(anno_file, "r") as f:
-        for line in f:
-            nori_id, target = line.strip().split()
-            samples.append((nori_id, int(target)))
-
-    num = len(samples)
-    stride = int(np.ceil(num / num_tasks))
-    s, t = local_rank * stride, min(num, (local_rank + 1) * stride)
-    
-    dataset = ImageNet(samples=samples[s:t], transform=transform,)
-
-    return dataset
-
-def imagenet_eval(args, gtDir = 'imagenet/imagenet-val'):
-
-    name = osp.basename(args.vq_ckpt).split('.')[0]
-    #* Perform evaluation on the generated images.
-    gtDir = 'imagenet/imagenet-val'
-    gen_names = os.listdir(args.output_dir)
-    img_names = os.listdir(gtDir)
-
-    assert len(gen_names) == len(img_names), \
-        f"generate only {len(gen_names)} images, while there are {len(img_names)} in total!"
-
-    metrics_dict = torch_fidelity.calculate_metrics(
-        input1=args.output_dir,
-        input2=gtDir,
-        cuda=True,
-        isc=True,
-        fid=True,
-        kid=False,
-        prc=False,
-        verbose=True,
-    )
-    fid_score = metrics_dict['frechet_inception_distance']
-    inception_score = metrics_dict['inception_score_mean']
-    print('FID:{:.4f}, IS: {:.4f}'.format(fid_score, inception_score))
-    with open('results.md', 'a') as fid:
-        fid.write(f'\n{name}\n')
-        fid.write('FID:{:.4f}, IS: {:.4f}\n'.format(fid_score, inception_score))
 
 def main(args):
 
@@ -138,11 +87,18 @@ def main(args):
     else:
         log_writer = None
 
-    # initialize the data loader
-    dataset = build_imagenet_dataloader(args.anno_file, num_tasks, global_rank, args)
-    
+    # Initialize the data loader
+    assert osp.exists(args.anno_file), f'Please ensure the existence of {args.anno_file}'
+    transform = transforms.Compose([
+                transforms.Lambda(lambda pil_image: center_crop_arr(pil_image, args.image_size)),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5], inplace=True)
+            ])
+
+    dataset = ImageNet(args.anno_file, transform)
+    sampler = DistributedSampler(dataset, rank = global_rank, shuffle = False)
     data_loader = DataLoader(
-        dataset,  
+        dataset, sampler = sampler,
         batch_size=args.batch_size, shuffle=False,
         num_workers=args.num_workers,
         pin_memory=False, drop_last=False,)
@@ -250,7 +206,7 @@ def gen_images(model, dataloader, device, args):
         gen_images = torch.clamp(127.5 * gen_images.permute(0, 2, 3, 1) + 128.0, 0, 255).to('cpu').numpy()
         images = torch.clamp(127.5 * images.permute(0, 2, 3, 1) + 128.0, 0, 255).to('cpu').numpy()
 
-        gemini = np.concatenate((images, gen_images), axis=2)
+        # gemini = np.concatenate((images, gen_images), axis=2)
         if is_main_process():
             print('{}, iter-{}/{}, gen_imgs.shape:{}'.format(this_model_dir, i, total, gen_images.shape))
             for k, re in enumerate(gen_images):
@@ -259,7 +215,6 @@ def gen_images(model, dataloader, device, args):
                 img = Image.fromarray(np.uint8(images[k]))
                 # rec = Image.fromarray(np.uint8(gemini[k]))
                 
-                # pdb.set_trace()
                 rec = rec.resize((256, 256))
                 img = img.resize((256, 256))
 

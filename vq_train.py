@@ -24,7 +24,7 @@ from hita.engine.logger import create_logger
 from hita.engine.lr_scheduler import build_scheduler
 from hita.engine.ema import update_ema, requires_grad
 from hita.engine.distributed import init_distributed_mode
-from hita.data.imagenet_nori import ImageNetNoriDataset as ImageNetDataset
+from hita.data.imagenet_lmdb import ImageNetLmdbDataset as ImageNetDataset
 from hita.engine.misc import is_main_process, all_reduce_mean, concat_all_gather, get_world_size, get_rank, get_world_size
 
 warnings.filterwarnings('ignore')
