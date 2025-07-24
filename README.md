@@ -62,17 +62,6 @@ pip install -e ".[train]"
 pip install flash-attn --no-build-isolation
 ```
 
-### Upgrade to latest code base
-
-```Shell
-git pull
-pip install -e .
-
-# if you see some import errors when you upgrade,
-# please try running the command below (without #)
-# pip install flash-attn --no-build-isolation --no-cache-dir
-```
-
 ## Model Zoom
 
 In this repo, we release:
