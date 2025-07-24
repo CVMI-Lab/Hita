@@ -3,7 +3,7 @@ mkdir -p output/logs
 model_type='GPT-L'
 export NODE_COUNT=1
 export NODE_RANK=0
-export PROC_PER_NODE=4
+export PROC_PER_NODE=8
 scripts/torchrun.sh  \
     train_c2i.py --gpt-type c2i --image-size 336 --gpt-model ${model_type} --downsample-size 16 --num-workers 4     \
     --anno-file imagenet/lmdb/train_lmdb --global-batch-size 64 --ckpt-every 10000 --ema --log-every 1             \

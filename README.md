@@ -2,6 +2,7 @@
 # Holistic Tokenizer for Autoregressive Image Generation <br><sub>Official PyTorch Implementation</sub>
 
 [![arXiv](https://img.shields.io/badge/arXiv-2507.02358-b31b1b.svg)](https://arxiv.org/abs/2507.02358)&nbsp;
+[![huggingface](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Hita-yellow)](https://huggingface.co/yexiguafu/hita-gen)&nbsp;
 
 
 <p align="center">
@@ -20,8 +21,8 @@ This repo contains:
 
 ## Release
 
-- [2025/07/21] 🔥 [Image tokenizers](https://huggingface.co/yexiguafu/hita-gen/tree/main) and [AR models](https://huggingface.co/yexiguafu/hita-gen/tree/main) for class-conditional image generation are released. 🔥
-- [2025/07/21] 🔥 All codes of Hita have been released. 🔥
+- [2025/07/24] 🔥 [Image tokenizers](https://huggingface.co/yexiguafu/hita-gen/tree/main) and [AR models](https://huggingface.co/yexiguafu/hita-gen/tree/main) for class-conditional image generation are released. 🔥
+- [2025/07/24] 🔥 All codes of Hita have been released. 🔥
 - [2024/07/03] 🔥 **Hita** has been released. Checkout the [paper](https://arxiv.org/pdf/2410.09575) for details.🔥
 - [2025/06/26] 🔥 **Hita has been accepted by ICCV 2025!** 🔥
 
@@ -76,10 +77,10 @@ pip install -e .
 
 In this repo, we release:
 * Two image tokenizers: Hita-V(anilla) and Hita-U(ltra).
-* Seven class-conditional generation models ranging from 100M to 3B parameters.
+* Class-conditional generation models ranging from 100M to 3B parameters.
 
 ### 1. VQ-VAE models
-In this repo, we release two image tokenizers: Hita-V(anilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction proposed in [VFMTok](https://arxiv.org/pdf/2507.08441), which exhibits better image reconstruction and generation quality.
+In this repo, we release two image tokenizers: Hita-V(anilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction proposed in [VFMTok](https://arxiv.org/pdf/2507.08441), which exhibits better image reconstruction and generation quality. 
 
 Method | tokens | rFID (256x256) | rIS (256x256)    | weight
 ---    | :---:  |:---:|:---:   | :---: 
@@ -131,7 +132,7 @@ HitaU-2B | 2.0B | 50  | 1.69 | 233.0 | [HitaU-2B-100e.pt](https://huggingface.co
 
 ### 1. Preparation
 
-1. Download the [DINOv2-L](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_reg4_pretrain.pth) pre-trained foundation model from the official [model card](https://github.com/facebookresearch/dinov2).
+1. Download the [DINOv2-L](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitl14/dinov2_vitl14_reg4_pretrain.pth) pre-trained foundation model from the official [model zoo](https://github.com/facebookresearch/dinov2).
 2. Create symbolic links that point from the locations of the pretrained DINOv2-L model and the ImageNet training dataset folders to this directory.
 3. Create dataset script for your own dataset. Here, we provide a template for training tokenizers and AR generative models using the ImageNet dataset in [LMDB](https://www.symas.com/mdb) format.
 
@@ -140,7 +141,7 @@ ln -s DINOv2-L_folder init_models
 ln -s ImageNetFolder imagenet
 ```
 
-### 1.Hita Tokenizer Training
+### 2.Hita Tokenizer Training
 
 1. Training Hita-V tokenizer:
 
@@ -161,7 +162,7 @@ scripts/torchrun.sh vq_train.py --image-size 336 --results-dir output --mixed-pr
     --transformer-config configs/hita_vqgan_ultra.yaml --ema --z-channels 512 --enable-vfm-recon
 ```
 
-### 2. AR generative model training
+### 3. AR generative model training
 
 1. Training AR generative models
 
@@ -185,7 +186,7 @@ scripts/torchrun.sh  \
     --lr 1e-4 --gpt-ckpt output/vanilla/${model_type}/${model_type}-{ckpt_name}.pt
 ```
 
-### 3. Evaluation (ImageNet 256x256)
+### 4. Evaluation (ImageNet 256x256)
 
 1. Evaluated a pretrained Hita-V tokenizer
 
@@ -204,6 +205,7 @@ scripts/torchrun.sh  \
         --transformer-config-file configs/hita_vqgan_ultra.yaml --z-channels 512              \
         --vq-ckpt pretrained_models/hita-ultra.pt
 ```
+
 3. Evaluate a pretrained AR generative model
 
 ```bash
@@ -234,4 +236,7 @@ If you find Hita useful for your research and applications, please kindly cite u
 
 ## Acknowledgement
 
-- [LlamaGen](https://github.com/FoundationVision/LlamaGen/tree/main): the codebase we built upon.
+Our codebase builds upon several excellent open-source projects, including [LlamaGen](https://github.com/FoundationVision/LlamaGen) and [Paintmind](https://github.com/Qiyuan-Ge/PaintMind). We are grateful to the communities behind them.
+
+## Contact
+This codebase has been cleaned up but has not undergone extensive testing. If you encounter any issues or have questions, please open a GitHub issue. We appreciate your feedback!
