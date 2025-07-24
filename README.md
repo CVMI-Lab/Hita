@@ -66,7 +66,7 @@ pip install flash-attn --no-build-isolation
 
 In this repo, we release:
 * Two image tokenizers: Hita-V(anilla) and Hita-U(ltra).
-* Class-conditional generation models ranging from 100M to 3B parameters.
+* Class-conditional autoregressive generative models ranging from 100M to 3B parameters.
 
 ### 1. VQ-VAE models
 In this repo, we release two image tokenizers: Hita-V(anilla) and Hita-U(ltra). Hita-V is utilized in the original paper, while Hita-U is an updated version that uses more advanced techniques, such as the DINO discriminator and the learning objective of pre-trained vision foundation model reconstruction proposed in [VFMTok](https://arxiv.org/pdf/2507.08441), which exhibits better image reconstruction and generation quality. 
