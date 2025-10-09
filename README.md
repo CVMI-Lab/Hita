@@ -111,7 +111,7 @@ HitaU-XL | 775M | 100 | 2.21 | 195.8 | [HitaU-XL-100e.pt](https://huggingface.co
 HitaU-XXL| 1.4B | 50  | 2.21 | 196.0 | [HitaU-XXL-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-50e.pt)
 HitaU-XXL| 1.4B | 100 | 1.84 | 217.2 | [HitaU-XXL-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-XXL/GPT-XXL-100e.pt)
 HitaU-2B | 2.0B | 50  | 1.97 | 208.6 | [HitaU-2B-50e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-50e.pt)
-HitaU-2B | 2.0B | 50  | 1.69 | 233.0 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
+HitaU-2B | 2.0B | 100 | 1.69 | 233.0 | [HitaU-2B-100e.pt](https://huggingface.co/yexiguafu/hita-gen/blob/main/ultra/GPT-2B/GPT-2B-100e.pt)
 
 ## Training
 
